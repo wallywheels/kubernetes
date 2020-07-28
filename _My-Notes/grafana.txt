@@ -1,0 +1,25 @@
+Using this:   http://www.allaboutwindowssl.com/2019/03/setup-prometheus-grafana-monitoring-on-azure-kubernetes-cluster-aks/
+
+# Steps for ReportPortal.Credaz3.com
+
+#  helm install grafar stable/grafana --set persistence.enabled=true --set persistence.accessModes={ReadWriteOnce} --set persistence.size=8Gi -n default
+1. Get your 'admin' user password by running:
+
+   kubectl get secret --namespace default grafar-grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+   admin password:  0X9okZrIMvs8gThhxiIrEfF6Gg8GJcTVFltrAjKk
+
+2. Created expose.grafana.yaml and uploaded to Azure
+3. kubectl apply -f expose-grafana.yaml
+4. Through powershell, connected to the postgresql database and created a new user, tech with Credant11 password with read only rights
+5. Logged into grafana portal via new public IP address:  http://40.124.82.83/  with admin user and admin password above
+7. Attached database in grafana with the following settings:
+    host: postdb-postgresql:5432
+    database: reportportal
+    user: rpuser
+    password: rpuserpassword
+    SSL mode: disabled
+
+
+
+
+kubectl expose service grafana-grafar --port=81 --target-port=80 --name=grafi

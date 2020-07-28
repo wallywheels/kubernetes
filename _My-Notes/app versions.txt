@@ -1,0 +1,46 @@
+Working RP in credaz4
+
+NAME                    NAMESPACE       REVISION        UPDATED                                 STATUS          CHART                   APP VERSION
+escname                 default         1               2020-02-07 16:37:13.162647765 +0000 UTC deployed        elasticsearch-7.5.0     7.5.0
+grafana-1589292664      default         1               2020-05-12 14:11:08.452326688 +0000 UTC deployed        grafana-5.0.3           6.6.2
+minio                   default         1               2020-02-07 16:41:26.36087382 +0000 UTC  deployed        minio-5.0.6             master
+my-nginx                default         1               2020-02-07 16:33:21.59117797 +0000 UTC  deployed        nginx-ingress-1.29.7    0.28.0
+postgresqlcname         default         1               2020-02-07 16:38:08.314879665 +0000 UTC deployed        postgresql-3.9.1        10.6.0
+rabbitmqcname           default         1               2020-02-07 16:37:56.350844638 +0000 UTC deployed        rabbitmq-ha-1.18.0      3.7.8
+reportportal            default         1               2020-04-10 13:20:04.568433206 +0000 UTC deployed        reportportal-5          5.0
+
+
+
+
+Working RP in credaz3
+
+walter@Azure:~$ helm list
+NAME            NAMESPACE       REVISION        UPDATED                                 STATUS          CHART                   APP VERSION
+escname         default         1               2020-07-17 14:26:45.298399779 +0000 UTC deployed        elasticsearch-7.6.1     7.6.1
+minio           default         1               2020-07-17 14:48:11.61573725 +0000 UTC  deployed        minio-3.4.16            2020.7.13
+my-nginx        default         1               2020-07-15 21:34:31.527434275 +0000 UTC deployed        nginx-ingress-1.40.2    0.32.0
+postdb          default         1               2020-07-17 18:15:11.987346255 +0000 UTC deployed        postgresql-3.9.1        10.6.0
+rabbitmqcname   default         1               2020-07-17 14:28:34.597769686 +0000 UTC deployed        rabbitmq-ha-1.18.0      3.7.8
+reportportal    default         1               2020-07-17 18:39:44.118514324 +0000 UTC deployed        reportportal-5          5.0
+
+
+walter@Azure:~$ helm list
+NAME            NAMESPACE       REVISION        UPDATED                                 STATUS          CHART                   APP VERSION
+escname         default         1               2020-07-21 13:57:26.218775567 +0000 UTC deployed        elasticsearch-7.6.1     7.6.1
+minio           default         1               2020-07-21 14:54:36.838217681 +0000 UTC deployed        minio-3.4.18            2020.7.18
+my-nginx        default         1               2020-07-15 21:34:31.527434275 +0000 UTC deployed        nginx-ingress-1.40.2    0.32.0
+postdb          default         1               2020-07-21 17:30:30.690790478 +0000 UTC deployed        postgresql-8.6.2        11.7.0
+rabbitmqcname   default         1               2020-07-21 14:33:55.907856545 +0000 UTC deployed        rabbitmq-ha-1.18.0      3.7.8
+reportportal    default         1               2020-07-21 17:32:24.574337761 +0000 UTC deployed        reportportal-5          5.0
+
+
+walter@Azure:~$ helm list
+NAME            NAMESPACE       REVISION        UPDATED                                 STATUS          CHART                   APP VERSION
+escname         default         1               2020-07-21 13:57:26.218775567 +0000 UTC deployed        elasticsearch-7.6.1     7.6.1
+minio           default         1               2020-07-21 14:54:36.838217681 +0000 UTC deployed        minio-3.4.18            2020.7.18
+my-nginx        default         1               2020-07-15 21:34:31.527434275 +0000 UTC deployed        nginx-ingress-1.40.2    0.32.0
+postdb          default         1               2020-07-21 18:26:39.579415387 +0000 UTC deployed        postgresql-8.6.2        11.7.0
+rabbitmqcname   default         1               2020-07-21 14:33:55.907856545 +0000 UTC deployed        rabbitmq-ha-1.18.0      3.7.8
+reportportal    default         1               2020-07-21 19:15:59.929029207 +0000 UTC deployed        reportportal-5.2.1      5.2.0
+
+

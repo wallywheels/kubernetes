@@ -1,0 +1,26 @@
+To Backup postgresql database
+
+1) connect to the postgresql db pod:
+    kubectl exec -it postdb-postgresql-0 -- /bin/bash
+2) command to backup db once I attached to the postgresql pod:
+    pg_dump -U rpuser reportportal -f ./build/backup.sql
+3) command to copy backup.sql from postdb pod onto root of shell of azure
+    kubectl cp postdb-postgresql-0:build/backup.sql ./backup.sql
+
+To restore postgresql database
+
+1) helm uninstall reportportal
+2) command to copy backup.sql from shell of azure to postdb pod
+    kubectl cp ./backup.sql postdb-postgresql-0:build/backup.sql
+3) connect to the postgresql pod
+    kubectl exec -it postdb-postgresql-0 -- /bin/bash
+4) If this is a new postgresql installation you need to alter the rpuser's rights
+    psql -h 127.0.0.1 -U postgres
+	ALTER USER rpuser WITH SUPERUSER;
+5) delete the reportportal database and recreate a raw reportportal database
+    drop database reportportal;
+    create database reportportal;
+    \q
+6) command to restore backup of postgresql backup.sql
+    psql -U rpuser reportportal < ./build/backup.sql
+7) Install reportportal 

@@ -1,0 +1,64 @@
+To install ReportPortal using the 5.2.3 version
+            
+1) Created the kubernetes Azure service
+2) Through the shell loged in with:
+	az aks get-credentials --resource-group ReportPortalK8s --name Cluster
+3) deleted all the charts in ./reportportalv5.2.3/charts/
+4) rebuilt charts by issuing:
+	helm dependency build ./reportportalv5.2.3/	
+5) helm install my-nginx stable/nginx-ingress --set rbac.create=true
+6) helm install escname ./reportportalv5.2.3/charts/elasticsearch-7.6.1.tgz
+7) helm install rabbitmqcname --set rabbitmqUsername=rabbitmq,rabbitmqPassword=rmqpassword ./reportportalv5.2.3/charts/rabbitmq-ha-1.18.0.tgz
+8) helm install postdb --set postgresqlUsername=rpuser,postgresqlPassword=rpuserpassword,postgresqlDatabase=reportportal,postgresqlPostgresPassword=ppassword -f ./reportportalv5.2.3/postgresql/values.yaml ./reportportalv5.2.3/charts/postgresql-8.6.2.tgz
+9) kubectl exec -it postdb-postgresql-0 -- /bin/bash
+	psql -h 127.0.0.1 -U postgres
+	ALTER USER rpuser WITH SUPERUSER;
+	\q
+	exit
+10) Packaged the ReportPortal by issuing:
+	helm package ./reportportalv5.2.3/
+11) helm install reportportal --set postgresql.SecretName=postdb-postgresql,rabbitmq.SecretName=rabbitmqcname-rabbitmq-ha ./reportportal-5.2.1.tgz
+
+commands that are useful:
+    kubectl get pvc
+    kubectl get jobs
+    helm list
+    
+
+installed successfully postgresql 
+helm install postdb --set postgresqlUsername=rpuser,postgresqlPassword=rpuserpassword,postgresqlDatabase=reportportal ./reportportal/charts/postgresql-3.9.1.tgz
+
+RP-5.2.1 - did not work
+helm install postdb --set postgresqlUsername=rpuser,postgresqlPassword=rpuserpassword,postgresqlDatabase=reportportal,postgresqlPostgresPassword=ppassword ./reportportalv5.1/charts/postgresql-8.6.2.tgz
+
+RP-5.2.3
+helm install postdb --set postgresqlUsername=rpuser,postgresqlPassword=rpuserpassword,postgresqlDatabase=reportportal,postgresqlPostgresPassword=ppassword -f ./reportportalv5.2.3/postgresql/values.yaml ./reportportalv5.2.3/charts/postgresql-8.6.2.tgz
+
+Updated in Azure reportportal/values.yaml file with actual values
+kubectl exec -it postdb-postgresql-0 -- /bin/bash
+	psql -h 127.0.0.1 -U postgres
+	ALTER USER rpuser WITH SUPERUSER;
+	\q
+	exit
+	
+Packaged the ReportPortal by issuing:   helm package ./reportportal/
+
+helm install reportportal --set postgresql.SecretName=postdb-postgresql,rabbitmq.SecretName=rabbitmqcname-rabbitmq-ha reportportal-5.tgz
+
+
+RP-5.2.3
+Packaged the ReportPortal by issuing:  helm package ./reportportalv5.2.3/
+
+helm install reportportal --set postgresql.SecretName=postdb-postgresql,rabbitmq.SecretName=rabbitmqcname-rabbitmq-ha ./reportportal-5.2.1.tgz
+
+
+
+
+
+
+To Upgrade to 5.2.2
+Downloaded latest github files for RP then edited the Values.yaml file and gateway-ingress.yaml and uploaded to Azure's new reportportalv5.2.2 folder 
+Packaged the ReportPortal by issuing:   helm package ./reportportalv5.2.2/
+
+Upgraded RP by issuing the following command:
+helm upgrade -f reportportalv5.2.2/values.yaml --set postgresql.SecretName=postdb-postgresql,rabbitmq.SecretName=rabbitmqcname-rabbitmq-ha reportportal ./reportportal-5.2.1.tgz

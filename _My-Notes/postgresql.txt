@@ -1,0 +1,46 @@
+This command worked with setting up the postgres password to passwordsecret
+
+helm install mrpostman --set postgresqlPassword=passwordsecret,postgresqlDatabase=reportal bitnami/postgresql
+
+mrpostman       default         1               2020-07-17 13:47:03.814366679 +0000 UTC deployed        postgresql-9.1.1        11.8.0
+
+
+
+
+helm install mrpostman --set postgresqlUsername=rpuser,postgresqlPassword=rpuserpassword,postgresqlDatabase=reportportal,postgresqlPostgresPassword=passwordsecret bitnami/postgresql
+
+
+helm install postman --set postgresqlUsername=rpuser,postgresqlPassword=rpuserpassword,postgresqlDatabase=reportportal,postgresqlPostgresPassword=passwordsecret bitnami/postgresql						
+
+
+NAME: postman
+LAST DEPLOYED: Fri Jul 17 14:15:27 2020
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+** Please be patient while the chart is being deployed **
+
+PostgreSQL can be accessed via port 5432 on the following DNS name from within your cluster:
+
+    postman-postgresql.default.svc.cluster.local - Read/Write connection
+
+To get the password for "postgres" run:
+
+    export POSTGRES_ADMIN_PASSWORD=$(kubectl get secret --namespace default postman-postgresql -o jsonpath="{.data.postgresql-postgres-password}" | base64 --decode)
+
+To get the password for "rpuser" run:
+
+    export POSTGRES_PASSWORD=$(kubectl get secret --namespace default postman-postgresql -o jsonpath="{.data.postgresql-password}" | base64 --decode)
+
+To connect to your database run the following command:
+
+    kubectl run postman-postgresql-client --rm --tty -i --restart='Never' --namespace default --image docker.io/bitnami/postgresql:11.8.0-debian-10-r61 --env="PGPASSWORD=$POSTGRES_PASSWORD" --command -- psql --host postman-postgresql -Urpuser -d reportportal -p 5432
+
+
+
+To connect to your database from outside the cluster execute the following commands:
+
+    kubectl port-forward --namespace default svc/postman-postgresql 5432:5432 &
+    PGPASSWORD="$POSTGRES_PASSWORD" psql --host 127.0.0.1 -U rpuser -d reportportal -p 5432

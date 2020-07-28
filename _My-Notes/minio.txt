@@ -1,0 +1,12 @@
+Command that worked for minio
+
+helm install minio --set accessKey.password=minioaccesskey --set secretKey.password=miniosecretkey bitnami/minio
+
+
+
+RP-5.2.3  -  did not work
+helm install minio --set accessKey=minioaccesskey,secretKey=miniosecretkey,persistence.size=40Gi stable/minio
+   
+   
+   
+   
