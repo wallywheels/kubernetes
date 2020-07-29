@@ -17,7 +17,8 @@ To install ReportPortal using the 5.2.3 version
 	exit
 10) Packaged the ReportPortal by issuing:
 	helm package ./reportportalv5.2.3/
-11) helm install reportportal --set postgresql.SecretName=postdb-postgresql,rabbitmq.SecretName=rabbitmqcname-rabbitmq-ha ./reportportal-5.2.1.tgz
+11) helm install minio --set accessKey.password=minioaccesskey --set secretKey.password=miniosecretkey bitnami/minio
+12) helm install reportportal --set postgresql.SecretName=postdb-postgresql,rabbitmq.SecretName=rabbitmqcname-rabbitmq-ha ./reportportal-5.2.1.tgz
 
 commands that are useful:
     kubectl get pvc
