@@ -5,3 +5,9 @@ This article requires that you are running the Azure CLI version 2.0.65 or later
 2) az aks get-upgrades --resource-group ReportPortalk8s --name Cluster --output table
 3) az aks upgrade --resource-group ReportPortalk8s --name Cluster --kubernetes-version KUBERNETES_VERSION
 4) az aks show --resource-group ReportPortalk8s --name Cluster --output table
+
+
+Wiped everything and deployed kubernetes v1.16.10
+rabbitmqcname did not work so found out this command worked:
+    helm install rabbitmqcname --set rabbitmqUsername=rabbitmq,rabbitmqPassword=rmqpassword,replicaCount=1 stable/rabbitmq
+

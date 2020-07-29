@@ -2,7 +2,7 @@ To install ReportPortal using the 5.2.3 version
             
 1) Created the kubernetes Azure service
 2) Through the shell loged in with:
-	az aks get-credentials --resource-group ReportPortalK8s --name Cluster
+	az aks get-credentials --resource-group reportportalk8s --name Cluster
 3) deleted all the charts in ./reportportalv5.2.3/charts/
 4) rebuilt charts by issuing:
 	helm dependency build ./reportportalv5.2.3/	
